@@ -1,7 +1,16 @@
 Welcome to the Nested Forms Lab!
 let's navigate to the '/new'
-<h1>Display your Pirate here</h1>
+<% unless params[:pirate].nil? %>
+  <h1><%= params[:pirate][:name] %></h1>
+  <p>Weight: <%= params[:pirate][:weight] %></p>
+  <p>Height: <%= params[:pirate][:height] %></p>
 
-<h2>Display your first ship here</h2>
-
-<h2>Display your second ship here</h2>
+  <% params[:pirate][:ships].each do |ship| %>
+    <% s = ship.last %>
+    <h2><%= s[:name] %></h2>
+    <p>Type: <%= s[:type] %></p>
+    <p>Booty: <%= s[:booty] %></p>
+  <% end %>
+<% else %>
+ <p>There are no pirates on the horizon...</p>
+<% end %>
